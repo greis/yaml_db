@@ -26,7 +26,7 @@ describe SerializationHelper::Base do
 
     context "for multi-file dumps" do
       before do
-        File.should_receive(:new).once.with("dir_name/mytable.yml", "w").and_return(@io)
+        File.should_receive(:open).once.with("dir_name/mytable.yml", "w").and_yield(@io)
         Dir.should_receive(:mkdir).once.with("dir_name")
         stub_helper!
         @dumper.should_receive(:dump_table).once.with(@io, "mytable")
